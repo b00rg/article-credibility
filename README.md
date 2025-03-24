@@ -5,7 +5,7 @@ This project is an AI-powered tool designed to assess the credibility of article
 
 It uses a fine-tuned LLaMA model trained on credible and uncredible articles to provide an in-depth evaluation of article trustworthiness. The LLaMA model has achieved **99% accuracy** against the validation dataset.
 
-To view, go to: b00rg.github.io/article-credibility/
+To view, go to: [b00rg.github.io/article-credibility/](https://b00rg.github.io/article-credibility/)
 
 ## Features
 - **AI-Powered Analysis**: Utilizes a fine-tuned LLaMA model trained on credible and non-credible sources.

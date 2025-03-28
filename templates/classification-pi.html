@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Credibility Score</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4efff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .left-side, .right-side {
+        width: 45%;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-side {
+        background-color: #e0e0f9;
+    }
+
+    .right-side {
+        background-color: #f4f4f9;
+        text-align: center;
+    }
+
+    h1 {
+        color: #5D3FD3;
+        text-align: center;
+    }
+
+    .score-label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #5D3FD3;
+        margin-top: 20px;
+    }
+
+    .confidence-message {
+        font-size: 16px;
+        margin-top: 10px;
+        color: #333;
+    }
+
+    .input-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .text-area {
+        width: 96%;
+        height: 150px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .file-drop {
+        padding: 20px;
+        text-align: center;
+        border: 2px dashed #5D3FD3;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #5D3FD3;
+        background-color: #f8f8ff;
+    }
+
+    .file-drop:hover {
+        background-color: #e6e6ff;
+    }
+
+    .analyze-btn {
+        padding: 10px 20px;
+        background-color: #5D3FD3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .analyze-btn:hover {
+        background-color: #4c2b99;
+    }
+
+    .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .chart-container canvas {
+        position: relative;
+    }
+
+    .chart-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 22px;
+        font-weight: bold;
+        color: #5D3FD3;
+    }
+
+    .info-tooltip {
+        position: relative;
+        display: inline-block;
+        color: #5D3FD3;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .info-tooltip .tooltip-text {
+        visibility: hidden;
+        width: 250px;
+        background-color: #5D3FD3;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .info-tooltip:hover .tooltip-text {
+        visibility: visible;
+    }
+
+    .probability-breakdown {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e0e0f9;
+        border-radius: 8px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .score-explanation {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        font-size: 14px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Article Credibility</h1>
+
+<div class="container">
+    <div class="left-side">
+        <div class="input-container">
+            <textarea id="articleText" class="text-area" placeholder="Paste the article text here..."></textarea>
+            <div class="file-drop" id="fileDrop">Drop a text file here or click to upload</div>
+            <input type="file" id="fileInput" accept=".txt" style="display: none;">
+            <button class="analyze-btn" onclick="analyzeArticle()">Analyze</button>
+        </div>
+      
+      <div class="score-explanation">
+          <h3>Key Factors</h3>
+          <p>Score based on bias, exaggeration, style, readability, and grammar.</p>
+      </div>
+    </div>
+
+    <div class="right-side">
+        <div class="score-label" id="publisherLabel">Article Credibility Score: Not Analyzed</div>
+        <div class="chart-container">
+            <canvas id="classificationChart"></canvas>
+            <div class="chart-label" id="chartLabel">--</div>
+        </div>
+        <div class="confidence-message" id="confidenceMessage"></div>
+
+        <div class="probability-breakdown">
+            <h3>Probability Breakdown</h3>
+            <p><strong>--%</strong> Uncredible News</p>
+            <p><strong>--%</strong> Credible News</p>
+            <div class="info-tooltip">What does this mean?
+                <span class="tooltip-text">The probability this text is sourced from credible or uncredible news sources based on comparisons with reliable and unreliable datasets.</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let chartInstance = null; 
+
+function analyzeArticle() {
+    const articleText = document.getElementById("articleText").value.trim();
+    if (articleText === "") {
+        alert("Please enter the article text.");
+        return;
+    }
+
+    // Create the data object to send to the Flask backend
+    const requestData = {
+        text: articleText
+    };
+
+    // Send POST request to the backend
+    fetch('http://127.0.0.1:5001/classify', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        const { label, probabilities } = data;
+
+        // Extract Credible and Uncredible probabilities
+        const credibleProb = probabilities[0][1];  // Credible probability
+        const uncredibleProb = probabilities[0][0];  // Uncredible probability
+        
+        let credibilityScore = credibleProb * 100;
+        let uncredibleScore = uncredibleProb * 100;
+
+        document.getElementById("publisherLabel").innerHTML = `Article Credibility Score: ${Math.round(credibilityScore)}%`;
+        document.getElementById("chartLabel").innerText = label;
+
+        // Determine Confidence Message based on Credibility Score
+        let confidenceMessage = credibilityScore >= 80 
+            ? "We are highly confident this text is credible." 
+            : credibilityScore >= 60 
+            ? "This text has a moderate credibility score." 
+            : credibilityScore >= 40 
+            ? "This text's credibility score is uncertain."
+            : "We are highly confident this text is unreliable.";
+
+        document.getElementById("confidenceMessage").innerText = confidenceMessage;
+
+        // Update the probability breakdown
+        document.querySelector(".probability-breakdown").innerHTML = `
+            <h3>Probability Breakdown</h3>
+            <p><strong>${Math.round(uncredibleScore)}%</strong> Uncredible News</p>
+            <p><strong>${Math.round(credibilityScore)}%</strong> Credible News</p>
+        `;
+
+        // Update the chart
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+
+        const ctx = document.getElementById("classificationChart").getContext("2d");
+        chartInstance = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Uncredible News", "Credible News"],
+                datasets: [{ data: [uncredibleScore, credibilityScore], backgroundColor: ["#b9a3f1", "#5D3FD3"], hoverOffset: 4 }]
+            },
+            options: { cutout: "70%" }
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while analyzing the article.');
+    });
+}
+
+document.getElementById("fileDrop").addEventListener("click", () => {
+    document.getElementById("fileInput").click();
+});
+
+document.getElementById("fileInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => document.getElementById("articleText").value = e.target.result;
+        reader.readAsText(file);
+    }
+});
+</script>
+</body>
+</html>

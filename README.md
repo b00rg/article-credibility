@@ -1,4 +1,5 @@
 # Credibility Analyzer
+> NOTE: Main is a work in progress. See article-classifier branch for a working LLaMA article credibility classifier using flask and javascript frontend
 
 ## Overview
 This project is an AI-powered tool designed to assess the credibility of articles based on various factors, including clickbait detection, writing style, tone, bias, advertisement content, readability, complexity, and semantic similarities. 

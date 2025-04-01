@@ -18,7 +18,6 @@ The model is hosted on **Hugging Face** and deployed using **Flask** for the API
 - Torch
 - PEFT
 - Flask-CORS
-- Gunicorn (for deployment)
 - Hugging Face Token for model access
 
 ## Setup and Installation
@@ -56,7 +55,7 @@ Alternatively, you can set the environment variable in your .env file.
 To start the Flask app locally, run:
 
 ```bash
-python app.py
+python model-classifier.py
 ```
 This will start the API server at http://localhost:5001.
 

@@ -7,7 +7,7 @@ import os
 
 # === CONFIGURATION ===
 base_model_name = "meta-llama/Llama-3.2-1B"
-adapter_path = "./checkpoint-400"
+adapter_path = "" # input your saved checkpoint folder here
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Load Hugging Face Token from Environment Variable

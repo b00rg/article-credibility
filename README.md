@@ -5,6 +5,8 @@ This branch deploys an **article credibility classifier** using a **Flask** back
 
 The model is hosted on **Hugging Face** and deployed using **Flask** for the API and **GitHub Pages** for the frontend.
 
+Please note that as this model was created in collaboration with Quantexa, the trained model weights cannot be provided as they are trained on proprietary Quantexa datasets. 
+
 ## Features
 - **Frontend**: A web page where users can input article text and receive classification results (Credible/Uncredible).
 - **Backend**: A Flask-based API that takes the article text, processes it, and returns the classification.
@@ -44,12 +46,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Set Environment Variables
-You will need a Hugging Face token to load the model. Set the HF_TOKEN environment variable:
-
-```bash
-export HF_TOKEN="your_hugging_face_token"
-```
-Alternatively, you can set the environment variable in your .env file.
+You will need a Hugging Face token to load the model. Make sure to request access via https://huggingface.co/meta-llama/Llama-3.2-1B and insert into the `HF_TOKEN` variable in the script. 
 
 ### 4. Run the Flask App Locally
 To start the Flask app locally, run:

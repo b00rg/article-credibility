@@ -20,4 +20,6 @@ Jordan Peterson is flagged as unreliable as his views often rely on controversia
 
 https://github.com/user-attachments/assets/2a22b71d-3453-46fb-a59a-d2ac517d0abb
 
+
+
 > NOTE: as the model was trained on Quantexa datasets, the weights are not available. Feel free to fine-tune your own model using https://github.com/b00rg/llama-templates as a reference. This model was trained using Kaggle's free GPUs, specifically their T4s. 

@@ -12,11 +12,11 @@ Key features include:
 ### Reliable Article/Publisher Output
 RTÉ is recognised as reliable by the algorithm because it adheres to journalistic standards, offering balanced reporting and comprehensive coverage of news from multiple perspectives.
 
-<img src="https://github.com/user-attachments/assets/a3404332-aafa-4c67-a42c-c91042f5fb18" alt="RTÉ Output" style="width: 100%;">
+![RTÉ Output](https://github.com/user-attachments/assets/a3404332-aafa-4c67-a42c-c91042f5fb18)
 
 ### Unreliable Article/Publisher Output
 Jordan Peterson is flagged as unreliable as his views often rely on controversial interpretations of psychology and sociology, with a tendency to blend personal opinion with unverified claims.
 
-<img src="https://github.com/user-attachments/assets/2a22b71d-3453-46fb-a59a-d2ac517d0abb" alt="RTÉ Output" style="width: 100%;">
+![Jordan Peterson Output](https://github.com/user-attachments/assets/2a22b71d-3453-46fb-a59a-d2ac517d0abb)
 
 > NOTE: as the model was trained on Quantexa datasets, the weights are not available. Feel free to fine-tune your own model using https://github.com/b00rg/llama-templates as a reference. This model was trained using Kaggle's free GPUs, specifically their T4s. 

@@ -1,0 +1,80 @@
+# #version: '3.9'
+
+# services:
+#   spark:
+#     build: ./Spark
+#     container_name: spark_container
+#     environment:
+#       - SPARK_MASTER_HOST=spark_container  # ✅ Explicitly set the Spark master hostname
+#     ports:
+#       - "8888:8888"  # Jupyter Notebook
+#       - "4040:4040"  # Spark UI
+#       - "7077:7077"  # Spark Cluster Communication
+#       - "8080:8080"  # Spark Master UI
+#       - "8081:8081"  # Spark Worker UI
+#     depends_on:
+#       - db
+#     volumes:
+#       - ./data:/data  # Shared data folder for articles
+
+#   db:
+#     image: postgres:latest
+#     container_name: postgres_db
+#     restart: always
+#     environment:
+#       POSTGRES_USER: sweng3
+#       POSTGRES_PASSWORD: Quantexa!
+#       POSTGRES_DB: newsdb
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+
+#   fastapi:
+#     build: ./backend
+#     container_name: fastapi_backend
+#     environment:
+#       - SPARK_MASTER_URL=spark://spark_container:7077  # ✅ Pass the correct Spark Master URL
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - spark
+#     volumes:
+#       - ./backend:/app
+
+# volumes:
+#   pgdata:
+
+
+version: '3.8'
+
+services:
+  backend:
+    image: my-backend
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./datasets:/datasets
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+    networks:
+      - my-network
+
+  frontend:
+    image: my-frontend
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

@@ -1,0 +1,63 @@
+stages:
+  - build
+  # - test  # Commented out for now, uncomment when tests are ready
+  - deploy
+
+variables:
+  DOCKER_HOST: "unix:///var/run/docker.sock"
+  DOCKER_TLS_CERTDIR: ""
+
+# Backend: Build Docker Image
+build_backend:
+  stage: build
+  tags:
+    - local-runner
+  script:
+    - docker build -t my-backend ./backend
+  only:
+    - master
+
+# Frontend: Build Docker Image
+build_frontend:
+  stage: build
+  tags:
+    - local-runner
+  script:
+    - docker build -t my-frontend ./frontend
+  only:
+    - master
+
+# # Backend: Run Tests (Commented Out)
+# test_backend:
+#   stage: test
+#   script:
+#     - docker run --rm my-backend pytest --maxfail=1 --disable-warnings
+#   dependencies:
+#     - build_backend
+#   only:
+#     - master
+
+# # Frontend: Run Tests (Commented Out)
+# test_frontend:
+#   stage: test
+#   script:
+#     - docker run --rm my-frontend npm test -- --ci --watchAll=false
+#   dependencies:
+#     - build_frontend
+#   only:
+#     - master
+
+# Deploy (Only if tests pass — but for now, runs after build)
+deploy:
+  stage: deploy
+  tags:
+    - local-runner
+  script:
+    - docker-compose up -d --build
+  dependencies:
+    - build_backend
+    - build_frontend
+    # - test_backend  # Uncomment when tests are ready
+    # - test_frontend  # Uncomment when tests are ready
+  only:
+    - master

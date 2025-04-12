@@ -1,0 +1,341 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+}
+
+.left-side, .right-side {
+    width: 45%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-side {
+    background-color: #e0e0f9;
+}
+
+.right-side {
+    background-color: #f4f4f9;
+    text-align: center;
+}
+
+h1 {
+    color: #5D3FD3;
+    text-align: center;
+}
+
+.score-label {
+    font-size: 25px;
+    font-weight: bold;
+    color: #5D3FD3;
+    margin-top: 20px;
+}
+
+.confidence-message {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.input-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.text-area {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+.publisher-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #b9a3f1; 
+    background-color: #f9f9f9; 
+    color: #333; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s ease; 
+}
+
+.publisher-input:focus {
+    border-color: #5D3FD3; 
+    outline: none;
+    background-color: #ffffff; 
+}
+
+
+.file-drop {
+    padding: 20px;
+    text-align: center;
+    border: 2px dashed #5D3FD3;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #5D3FD3;
+    background-color: #f8f8ff;
+}
+
+.file-drop:hover {
+    background-color: #e6e6ff;
+}
+
+.analyze-btn {
+    padding: 10px 20px;
+    background-color: #5D3FD3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.analyze-btn:hover {
+    background-color: #4c2b99;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+.chart-container canvas {
+    position: relative;
+}
+
+.chart-label {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #5D3FD3;
+    text-align: center;
+}
+
+.info-tooltip {
+    position: relative;
+    display: inline-block;
+    color: #5D3FD3;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.container { /*this basically gives the charts a background so that it does not appear disjoint*/
+    max-width: 2000px; 
+    margin: 0 auto; 
+  }
+.info-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #5D3FD3;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info-tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
+.probability-breakdown {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #e0e0f9;
+    border-radius: 8px;
+    font-size: 16px; 
+    text-align: center;
+}
+
+.top-publishers {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+
+}
+/* Parent container */
+.button-container {
+    display: flex; /* Use flex layout for centering */
+    justify-content: space-between; /* Distribute buttons evenly across the container */
+    align-items: center; /* Vertically center the buttons */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+
+.button-no{
+background-color: #5D3FD3;
+
+}
+.button-yes{
+    background-color: #5D3FD3;
+    display : centre;
+
+}
+/* Button styles */
+.file-button-llama {
+    display: inline-flex; /* Keep buttons on the same line */
+    justify-content: center; /* Center text/content horizontally within each button */
+    align-items: center; /* Center text/content vertically within each button */
+    background-color: #b9a3f1;  /* Dark purple background */
+    border: 1px solid #b9a3f1;  /* Matching border */
+    border-radius: .25rem;
+    box-sizing: border-box;
+    color: black; /* White text for contrast */
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.25;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    flex: 1; /* Make each button take up 1/3 of the space */
+    margin: 0 10px; /* Optional: space between buttons */
+}
+
+/* Button hover effect */
+.file-button:hover {
+    background-color: #3e1f6b; /* Slightly darker purple on hover */
+    border-color: #3e1f6b; /* Matching hover border */
+    color: #ffffff; /* Ensure text stays white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add subtle shadow effect */
+}
+
+/* Button focus effect */
+.file-button:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #5D3FD3; /* Highlight border color on focus */
+}
+
+/* Button active effect */
+.file-button:active {
+    background-color: #3e1f6b; /* Same as hover for consistency */
+    border-color: #3e1f6b; /* Same as hover */
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px; /* Active state box-shadow */
+    transform: translateY(1px); /* Simulate a pressed button */
+}
+  
+
+.score-explanation {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: white;
+    margin: 0; /* Optional: Reset default body margin */
+    padding: 0; /* Optional: Reset default body padding */
+  }
+
+  .modal-footer-llama {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-evenly; /* Distribute items evenly */
+    align-items: center; /* Vertically center the items */
+    padding: 15px; /* Optional: Add padding for spacing */
+}
+
+  /*  formatting for popup box of publisher scores */
+.modal-overlay {
+    display: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;  /* Ensure it's on top of other content */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 800px;  /* Adjust width as necessary */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: center;
+  }
+  
+/* Modal Header */
+.modal-header-llama {
+    display: flex;
+    justify-content: space-between; /* Align text on the left and "X" button on the right */
+    align-items: center; /* Vertically center both items */
+    position: relative;
+    margin-bottom: 10px;
+    padding: 10px 15px; /* Optional: Add padding to create space inside the header */
+}
+
+/* Close Button (X) */
+.modal-header-llama .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    background: transparent;
+    border: none;
+}
+
+/* Optional: Ensure text and "X" button have space between them */
+.modal-header-llama h2 {
+    margin: 0;
+}
+
+  
+  /* Close Button (X) */
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #4b2f87;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #5D3FD3;
+  }
+  
+  /* Modal List */
+  .modal-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .modal-content li {
+    margin-bottom: 10px;
+  }
+  

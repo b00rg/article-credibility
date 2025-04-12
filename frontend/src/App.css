@@ -1,0 +1,586 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #2A0A5E; /* Dark purple */
+  color: white;
+}
+
+/* App Layout */
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #2A0A5E; /* Dark purple */
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #B47DFF; /* Light purple */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li:hover {
+  background-color: #8F5AE7; /* Light purple hover */
+}
+
+/* Dropdown Styles */
+.dropdown {
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Adjust dropdown position */
+  left: 0;
+  background-color: #5C1FA0; /* Dark purple */
+  list-style-type: none;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 8px;
+  width: 100%;
+  display: none; /* Hide dropdown by default */
+  z-index: 1000; /* Ensure it's above other content */
+  box-sizing: border-box;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for list items */
+  margin-left: 5px; /* Creates the gap on the left side */
+  transition: background-color 0.3s ease;
+  background-color: transparent; /* Make sure background doesn't fill by default */
+  overflow: hidden;
+}
+
+.dropdown-menu li .dropdown-item-content {
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for the hoverable content */
+  background-color: transparent; /* Transparent background by default */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover state for list items */
+.dropdown-menu li:hover .dropdown-item-content {
+  background-color: #8F5AE7; /* Light purple hover */
+}
+
+/* Show the dropdown when it's open */
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+
+/* Main Content Styles */
+.main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px 20px; /* Reduced top padding */
+  background-color: #F5F1FA; /* Light purple */
+  color: #2A0A5E; /* Dark text */
+  min-height: 100vh;
+}
+
+.main-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-size: 22px;
+}
+
+.card p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Drag-and-Drop Upload */
+.aqc-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  color: #2A0A5E; /* Dark text */
+}
+
+.aqc-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2A0A5E;
+}
+
+.aqc-dropzone {
+  padding: 30px;
+  border: 3px dashed #B47DFF;
+  border-radius: 8px;
+  background-color: #F5F1FA;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.aqc-dropzone:hover {
+  background-color: #E2D8F8;
+  border-color: #8F5AE7;
+}
+
+.aqc-dropzone p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6B46C1;
+}
+
+.aqc-dropzone-icon {
+  font-size: 5rem; 
+  text-align: center;
+  margin-bottom: 15px;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.aqc-dropzone:hover .aqc-dropzone-icon {
+  transform: scale(1.1); /* Slightly enlarges on hover */
+}
+
+/* File List */
+.aqc-dropzone-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.aqc-file-name {
+  color: #059669;
+  font-weight: 500;
+}
+
+.aqc-file-remove {
+  border: none;
+  background: none;
+  color: #ef4444;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Buttons */
+button {
+  background-color: #B47DFF;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #8F5AE7;
+}
+
+/* Disabled Button */
+.aqc-button-disabled {
+  background-color: #9ca3af;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Results Container */
+.aqc-results {
+  background-color: #F5F1FA;
+  border-radius: 6px;
+  padding: 16px;
+  color: #2A0A5E;
+}
+
+/* Progress Bars */
+.aqc-progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #D1D5DB;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.aqc-progress-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.4s;
+}
+
+/* Colors for Different Metrics */
+.fill-blue {
+  background-color: #8F5AE7;
+}
+.fill-green {
+  background-color: #10b981;
+}
+.fill-red {
+  background-color: #ef4444;
+}
+.fill-yellow {
+  background-color: #f59e0b;
+}
+
+/* Tables */
+.table-container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #E2D8F8;
+}
+
+tbody tr:hover {
+  background-color: #F5F1FA;
+}
+
+/* Spinner inside button */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* FAQ Styles */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.faq-item {
+  margin-bottom: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.faq-question {
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: #f0f2f5;
+}
+
+.faq-question.active {
+  background-color: #e9ecef;
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.toggle-icon {
+  font-size: 24px;
+  color: #6c757d;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #fff;
+}
+
+.faq-answer.show {
+  max-height: 500px;
+  padding: 20px;
+}
+
+.faq-answer p {
+  margin: 0;
+  line-height: 1.6;
+  color: #495057;
+}
+
+/* Article Quality Checker Rating Chart Styles */
+.aqc-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.aqc-rating-chart {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.aqc-rating-chart h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.aqc-rating-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.aqc-rating-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aqc-rating-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.aqc-rating-item span:last-child {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Publisher Rating Chart Styles */
+.publisher-rating-container {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.publisher-rating-chart {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.publisher-rating-chart h3 {
+  color: #5D3FD3;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.chart-container {
+  position: relative;
+  margin: 1rem 0;
+  height: 300px;
+}
+
+.chart-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  font-size: 1.5rem;
+  color: #5D3FD3;
+  font-weight: 600;
+}
+
+.confidence-text {
+  color: #2A0A5E;
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.probability-breakdown {
+  background-color: #F8F7FF;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.probability-breakdown h4 {
+  color: #2A0A5E;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.probability-item {
+  margin: 0.5rem 0;
+  color: #2A0A5E;
+  font-size: 0.9rem;
+}
+
+/* Legend Styles */
+.recharts-legend-wrapper {
+  margin-top: 1rem !important;
+}
+
+.recharts-legend-item {
+  padding: 0 1rem !important;
+}
+
+.recharts-legend-item-text {
+  margin-left: 5px !important;
+}
+
+.publisher-rating-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.publisher-rating-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.publisher-rating-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.publisher-rating-item span:last-child {
+  color: #2A0A5E;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Add these new styles */
+.charts-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 80px;
+  width: 100%;
+  justify-content: center;
+}
+
+.charts-row .chart-container {
+  flex: 1;
+  max-width: 800px;
+  min-height: 600px;
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add specific style for distribution charts */
+.charts-row .chart-container.distribution-chart {
+  min-height: 500px;
+}
+
+/* Add specific style for domain and categories charts */
+.charts-row .chart-container.domain-chart {
+  min-height: 500px;
+}
+
+.charts-row .chart-container h3 {
+  margin-bottom: 30px;
+  color: #2A0A5E;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.charts-row .chart-container p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}

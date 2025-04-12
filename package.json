@@ -1,0 +1,16 @@
+{
+  "name": "sweng-gitlab",
+  "version": "1.0.0",
+  "description": "Our project -- Project 35: Quantexa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.scss.tcd.ie/sweng25_group03_quantexa/sweng25_group03_quantexa"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

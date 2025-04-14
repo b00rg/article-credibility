@@ -5,11 +5,11 @@
 > Created in collaboration with Quantexa as a foundation for an upcoming content credibility product. Please note that as the model weights were trained on Quantexa datasets, these are unavailable for display. Feel free to train your own model weights using the `finetuning` folder code. See https://www.quantexa.com/ for more information.
 
 ## Model Optimization
-LoRA (Low-Rank Adaptation) and Mixed Precision Training reduce training time by 70% without impacting accuracy.
+LoRA (Low-Rank Adaptation) and Mixed Precision Training reduced training time by 70% without impacting accuracy, allowing the model to be trained on free Kaggle GPUs in just 3 hours.
 
 ## Publisher Scoring System:
-* Designed a scoring mechanism to evaluate the overall credibility of news publishers based on historical content analysis in local storage.
-* Quick download/upload/clear buttons for ease of use.
+* A scoring mechanism is used to evaluate the overall credibility of news publishers based on historical content analysis in local storage.
+* Quick download/upload/clear buttons of publisher datasets for ease of use.
 
 ## Interactive Frontend:
 React-based dashboard to visualize credibility scores, trends, metrics, and publisher tables for the UI.

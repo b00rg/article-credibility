@@ -1,8 +1,9 @@
 # Credibility Classifier
 * A credibility classifier built using a fine-tuned LLaMA model and Hugging Face Transformers, achieving 99% accuracy for labelling credible vs. non-credible articles. 
 * Article Scores are accumulated for an overall publisher average credibility rating.
+* Created in collaboration with Quantexa as a foundation for an upcoming publisher credibility product.
 
-> Created in collaboration with Quantexa as a foundation for an upcoming content credibility product. Please note that as the model weights were trained on Quantexa datasets, these are unavailable for display. Feel free to train your own model weights using the `finetuning` folder code. See https://www.quantexa.com/ for more information.
+> Please note that as the model weights were trained on Quantexa datasets, these are unavailable for display. Feel free to train your own model weights using the `finetuning` folder code. See https://www.quantexa.com/ for more information.
 
 ## Model Optimization
 LoRA (Low-Rank Adaptation) and Mixed Precision Training reduced training time by 70% without impacting accuracy, allowing the model to be trained on free Kaggle GPUs in just 3 hours.

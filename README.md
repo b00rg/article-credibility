@@ -7,11 +7,11 @@
 ## Key Features
 Model Optimization: LoRA (Low-Rank Adaptation) and Mixed Precision Training reduce training time by 70% without impacting accuracy.
 
-## Publisher Scoring System:
+## Publisher Scoring System:
 * Designed a scoring mechanism to evaluate the overall credibility of news publishers based on historical content analysis in local storage.
 * Quick download/upload/clear buttons for ease of use.
 
-## Interactive Frontend:
+## Interactive Frontend:
 React-based dashboard to visualize credibility scores, trends, metrics, and publisher tables for the UI.
 
 ### Reliable Article/Publisher
